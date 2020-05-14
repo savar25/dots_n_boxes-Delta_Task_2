@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:extra="http://schemas.android.com/apk/res/com.example.dots_n_boxes"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#c19a6b"
+    tools:context=".gamePage">
+
+    <com.example.dots_n_boxes.Gview
+        android:id="@+id/trial"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="120dp"
+        android:background="#664400"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        extra:columns="7"
+        extra:rows="7"
+        extra:p1name="A"
+        extra:p2name="A"/>
+
+    <TextView
+        android:id="@+id/p1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/trial"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.49" />
+
+    <TextView
+        android:id="@+id/presentPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:textAlignment="center"
+
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/colorV"
+        android:layout_width="107dp"
+        android:layout_height="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/trial"
+        app:layout_constraintEnd_toEndOf="@+id/presentPlayer"
+        app:layout_constraintStart_toStartOf="@+id/presentPlayer"
+        app:layout_constraintTop_toBottomOf="@+id/presentPlayer" />
+
+    <TextView
+        android:id="@+id/p2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/colorV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/p1" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:background="#664400"
+        android:text="@string/end"
+        android:textColor="#FFFF65"
+        app:layout_constraintBottom_toBottomOf="@+id/colorV"
+        app:layout_constraintStart_toEndOf="@+id/colorV"
+        app:layout_constraintTop_toTopOf="@+id/colorV"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

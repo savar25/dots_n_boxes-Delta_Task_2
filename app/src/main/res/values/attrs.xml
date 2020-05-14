@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Gview">
+        <attr name="columns" format="integer"/>
+        <attr name="rows" format="integer"/>
+        <attr name="p1name" format="string"/>
+        <attr name="p2name" format="string"/>
+    </declare-styleable>
+</resources>

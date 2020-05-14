@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">dots_n_boxes</string>
+    <string name="heading">DOTS\t N\t BOXES</string>
+    <string name="rows">ROWS :</string>
+    <string name="columns">COLUMNS :</string>
+    <string name="start">Start New Game</string>
+    <string name="end">END\nGAME</string>
+    <string name="loop">New Game</string>
+    <string name="Player1">Player 1: </string>
+    <string name="Player2">Player 2: </string>
+</resources>
