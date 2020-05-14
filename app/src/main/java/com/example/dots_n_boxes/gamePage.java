@@ -121,7 +121,7 @@ public static Context context;
     @Override
     protected void onRestart() {
         super.onRestart();
-        Intent pa = new Intent(gamePage.this, MainActivity.class);
+        Intent pa = new Intent(gamePage.this, major.class);
         startActivity(pa);
     }
 }

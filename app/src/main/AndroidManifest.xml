@@ -5,13 +5,15 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_new"
-        android:label=" Dots \'N\' Boxes"
+        android:label=" Dots \&apos;N\&apos; Boxes"
         android:roundIcon="@mipmap/ic_new_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".winner"></activity>
-        <activity android:name=".gamePage"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".major"></activity>
+        <activity android:name=".winner" />
+        <activity
+            android:name=".gamePage"
+            android:screenOrientation="portrait" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

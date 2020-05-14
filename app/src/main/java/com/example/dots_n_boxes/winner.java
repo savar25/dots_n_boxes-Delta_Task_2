@@ -40,7 +40,7 @@ public class winner extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1=new Intent(winner.this,MainActivity.class);
+                Intent intent1=new Intent(winner.this,major.class);
                 startActivity(intent1);
             }
         });
