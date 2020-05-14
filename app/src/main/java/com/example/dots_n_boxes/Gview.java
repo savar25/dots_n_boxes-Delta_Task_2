@@ -336,10 +336,14 @@ public class Gview extends View {
 
                                     case 3:
                                     Log.d(TAG, "rightCheckBox: called");
-                                    int Rdw = getMeasuredWidth() / (row + 1);
+                                    int Rdw = getMeasuredWidth() / (col + 1);
                                     Point RinitPlus = new Point(initPoint.x+Rdw, initPoint.y);
                                     Point RfinalPlus = new Point(finalPoint.x+Rdw, finalPoint.y );
-
+                                        init1.clear();
+                                        init2.clear();
+                                        init3.clear();
+                                        init4.clear();
+                                        element.clear();
                                     init1.add(initPoint);
                                     init1.add(finalPoint);
                                     element.add(init1);
@@ -359,8 +363,8 @@ public class Gview extends View {
                                     Log.d(TAG, "onTouchEvent: rightCheck"+element);
 
                                     if (checkPoint(element)) {
-                                        canvas.drawRect(initPoint.x, finalPoint.y, RinitPlus.x, RinitPlus.y, markpaint);
-                                        canvas.drawRect(initPoint.x, finalPoint.y, RinitPlus.x, RinitPlus.y, margpaint);
+                                        canvas.drawRect(initPoint.x, initPoint.y, RinitPlus.x, finalPoint.y, markpaint);
+                                        canvas.drawRect(initPoint.x, initPoint.y, RinitPlus.x, finalPoint.y, margpaint);
                                         Log.d(TAG2, "rightCheckBox: assigned");
                                         if(markpaint.getColor()==Color.GREEN){
                                             this.p1s++;
@@ -378,7 +382,7 @@ public class Gview extends View {
                                     case 4:
 
                                         Log.d(TAG, "leftCheckBox: called");
-                                    int Ldw = getMeasuredWidth() / (row + 1);
+                                    int Ldw = getMeasuredWidth() / (col + 1);
                                     Point LEinitPlus = new Point(initPoint.x-Ldw, initPoint.y);
                                     Point LEfinalPlus = new Point(finalPoint.x-Ldw, finalPoint.y );
 
@@ -407,8 +411,8 @@ public class Gview extends View {
                                     Log.d(TAG, "onTouchEvent: left check"+ element);
 
                                     if (checkPoint(element)) {
-                                        canvas.drawRect(initPoint.x, finalPoint.y, LEinitPlus.x, LEinitPlus.y, markpaint);
-                                        canvas.drawRect(initPoint.x, finalPoint.y, LEinitPlus.x, LEinitPlus.y, margpaint);
+                                        canvas.drawRect(initPoint.x, initPoint.y, LEinitPlus.x, finalPoint.y, markpaint);
+                                        canvas.drawRect(initPoint.x, initPoint.y, LEinitPlus.x, finalPoint.y, margpaint);
                                         Log.d(TAG2, "leftCheckBox: assigned");
                                         if(markpaint.getColor()==Color.GREEN){
                                             this.p1s++;

@@ -116,5 +116,13 @@ public static Context context;
                 context.startActivity(intent);
             }
         }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Intent pa = new Intent(gamePage.this, MainActivity.class);
+        startActivity(pa);
+    }
 }
 
