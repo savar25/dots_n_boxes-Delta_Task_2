@@ -281,7 +281,7 @@ public class Gview extends View {
                                         canvas.drawRect(UinitPlus.x, UinitPlus.y, UfinalPlus.x, finalPoint.y, markpaint);
                                         canvas.drawRect(UinitPlus.x, UinitPlus.y, UfinalPlus.x, finalPoint.y, margpaint);
                                         Log.d(TAG2, "upperboxCheck: assigned");
-
+                                        gamePage.Winmusic();
                                         if(markpaint.getColor()==Color.GREEN){
                                             this.p1s++;
                                             canvas.drawText(p1n,(finalPoint.x+initPoint.x)/2,(finalPoint.y+UfinalPlus.y)/2+10,letPaint);
@@ -330,6 +330,7 @@ public class Gview extends View {
                                         canvas.drawRect(LinitPlus.x, LinitPlus.y, LfinalPlus.x, finalPoint.y, markpaint);
                                         canvas.drawRect(LinitPlus.x, LinitPlus.y, LfinalPlus.x, finalPoint.y, margpaint);
                                         Log.d(TAG2, "lowerBoxCheck: assgigned");
+                                       gamePage.Winmusic();
                                         if(markpaint.getColor()==Color.GREEN){
                                             this.p1s++;
                                             canvas.drawText(p1n,(finalPoint.x+initPoint.x)/2,(finalPoint.y+LfinalPlus.y)/2+10,letPaint);
@@ -376,6 +377,7 @@ public class Gview extends View {
                                     if (checkPoint(element)) {
                                         canvas.drawRect(initPoint.x, initPoint.y, RinitPlus.x, finalPoint.y, markpaint);
                                         canvas.drawRect(initPoint.x, initPoint.y, RinitPlus.x, finalPoint.y, margpaint);
+                                        gamePage.Winmusic();
                                         Log.d(TAG2, "rightCheckBox: assigned");
                                         if(markpaint.getColor()==Color.GREEN){
                                             this.p1s++;
@@ -424,6 +426,7 @@ public class Gview extends View {
                                     if (checkPoint(element)) {
                                         canvas.drawRect(initPoint.x, initPoint.y, LEinitPlus.x, finalPoint.y, markpaint);
                                         canvas.drawRect(initPoint.x, initPoint.y, LEinitPlus.x, finalPoint.y, margpaint);
+                                        gamePage.Winmusic();
                                         Log.d(TAG2, "leftCheckBox: assigned");
                                         if(markpaint.getColor()==Color.GREEN){
                                             this.p1s++;

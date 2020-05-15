@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -66,7 +67,7 @@ public static Context context,context1;
             @Override
             public void onClick(View view) {
                 moveDown(new View(gamePage.this));
-
+                EndMusic();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -177,6 +178,7 @@ public static Context context,context1;
         public static void checkfull() {
 
             if (p1sc + p2sc == (rows - 1) * (cols - 1)) {
+                EndMusic();
                 Intent intent=new Intent(context,winner.class);
                 intent.putExtra("p1Score",p1sc);
                 intent.putExtra("p2Score",p2sc);
@@ -209,6 +211,16 @@ public static Context context,context1;
     public static void come(View view){
         Animation animation= AnimationUtils.loadAnimation(context1,R.anim.come);
         gamePage.color.startAnimation(animation);
+    }
+
+    public static void Winmusic(){
+        MediaPlayer winMusic=MediaPlayer.create(context,R.raw.wins);
+        winMusic.start();
+    }
+
+    public static void EndMusic(){
+        MediaPlayer endMusic=MediaPlayer.create(context,R.raw.applause);
+        endMusic.start();
     }
 }
 

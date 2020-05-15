@@ -3,6 +3,7 @@ package com.example.dots_n_boxes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -75,6 +76,8 @@ public class major extends AppCompatActivity {
             public void onClick(View view) {
 
                 moveDown(new View(major.this));
+
+
 
                 new Handler().postDelayed(new Runnable() {
                     @Override

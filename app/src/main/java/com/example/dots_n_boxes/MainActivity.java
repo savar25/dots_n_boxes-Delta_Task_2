@@ -3,6 +3,7 @@ package com.example.dots_n_boxes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -28,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
         View view=new View(MainActivity.this);
         setAnim(view);
+
+        MediaPlayer popMusic=MediaPlayer.create(MainActivity.this,R.raw.pop);
+        popMusic.start();
 
         new Handler().postDelayed(new Runnable() {
             @Override
