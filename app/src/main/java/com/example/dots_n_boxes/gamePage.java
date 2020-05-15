@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -25,6 +28,7 @@ public static Context context,context1;
     public static String p1n,p2n;
     public static String p1nS,p2nS;
     public static View view;
+    public static Vibrator vibrator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +81,7 @@ public static Context context,context1;
 
             }
         });
+            vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
             context=gamePage.this;
             context1=getApplicationContext();
             view=new View(context);
@@ -120,7 +125,14 @@ public static Context context,context1;
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        come(view);}
+                        come(view);
+                        if (Build.VERSION.SDK_INT > 26) {
+                            vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+                        } else {
+                            vibrator.vibrate(100);
+                        }
+
+                       }
                 },50);
 
 
@@ -136,7 +148,12 @@ public static Context context,context1;
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        come(view);}
+                        come(view);
+                        if (Build.VERSION.SDK_INT > 26) {
+                            vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+                        } else {
+                            vibrator.vibrate(100);
+                        }}
                 },50);
             }
         }

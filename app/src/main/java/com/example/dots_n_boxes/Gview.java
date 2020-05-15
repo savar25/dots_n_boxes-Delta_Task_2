@@ -11,6 +11,9 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -19,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.VIBRATOR_SERVICE;
 
 public class Gview extends View {
     public Paint paint, cpaint, markpaint, bpaint,margpaint,letPaint;
@@ -276,6 +281,7 @@ public class Gview extends View {
                                         canvas.drawRect(UinitPlus.x, UinitPlus.y, UfinalPlus.x, finalPoint.y, markpaint);
                                         canvas.drawRect(UinitPlus.x, UinitPlus.y, UfinalPlus.x, finalPoint.y, margpaint);
                                         Log.d(TAG2, "upperboxCheck: assigned");
+
                                         if(markpaint.getColor()==Color.GREEN){
                                             this.p1s++;
                                             canvas.drawText(p1n,(finalPoint.x+initPoint.x)/2,(finalPoint.y+UfinalPlus.y)/2+10,letPaint);
