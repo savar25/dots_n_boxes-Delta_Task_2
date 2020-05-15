@@ -6,7 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,10 +20,11 @@ public class gamePage extends AppCompatActivity {
     public static TextView p2s;
     public static ImageView color;
     public static int p1sc,p2sc;
-public static Context context;
+public static Context context,context1;
     public  static int rows,cols;
     public static String p1n,p2n;
     public static String p1nS,p2nS;
+    public static View view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,16 +61,25 @@ public static Context context;
             end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                moveDown(new View(gamePage.this));
 
-              Intent  intent=new Intent(gamePage.this,winner.class);
-                intent.putExtra("p1Score",p1sc);
-                intent.putExtra("p2Score",p2sc);
-                intent.putExtra("p1n",p1nS);
-                intent.putExtra("p2n",p2nS);
-                startActivity(intent);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent  intent=new Intent(gamePage.this,winner.class);
+                        intent.putExtra("p1Score",p1sc);
+                        intent.putExtra("p2Score",p2sc);
+                        intent.putExtra("p1n",p1nS);
+                        intent.putExtra("p2n",p2nS);
+                        startActivity(intent);
+                    }
+                },200);
+
             }
         });
             context=gamePage.this;
+            context1=getApplicationContext();
+            view=new View(context);
         }
 
 
@@ -74,19 +87,58 @@ public static Context context;
         static public void setPlayerShow(int choice) {
 
             if(choice==1){
-                PlayerShow.setText(p1nS);
-                PlayerShow.setTextColor(Color.GREEN);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        PlayerShow.setTextColor(Color.GREEN);
+                        PlayerShow.setText(p1nS);
+
+                    }
+                },600);
+
             }else{
-                PlayerShow.setText(p2nS);
-                PlayerShow.setTextColor(Color.YELLOW);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        PlayerShow.setText(p2nS);
+                        PlayerShow.setTextColor(Color.YELLOW);
+                    }
+                },600);
+
             }
         }
 
         static public void setColor(int color) {
             if(color==1){
-                gamePage.color.setBackgroundColor(Color.GREEN);}
-            else {
-                gamePage.color.setBackgroundColor(Color.YELLOW);}
+                move(view);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        gamePage.color.setBackgroundColor(Color.GREEN);}
+                    },400);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        come(view);}
+                },50);
+
+
+        }else {
+                move(view);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        gamePage.color.setBackgroundColor(Color.YELLOW);
+                    }
+                }, 400);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        come(view);}
+                },50);
+            }
         }
 
 
@@ -123,6 +175,23 @@ public static Context context;
         super.onRestart();
         Intent pa = new Intent(gamePage.this, major.class);
         startActivity(pa);
+    }
+
+    public void moveDown(View view){
+        Button end=findViewById(R.id.button2);
+        Animation animation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.go_down);
+        end.startAnimation(animation);
+    }
+
+    public static void move(View view){
+        Animation animation= AnimationUtils.loadAnimation(context1,R.anim.move);
+        gamePage.color.startAnimation(animation);
+
+    }
+
+    public static void come(View view){
+        Animation animation= AnimationUtils.loadAnimation(context1,R.anim.come);
+        gamePage.color.startAnimation(animation);
     }
 }
 

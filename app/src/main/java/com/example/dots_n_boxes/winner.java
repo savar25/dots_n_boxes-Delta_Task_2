@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -26,7 +29,7 @@ public class winner extends AppCompatActivity {
         sc1.setText(p1n+"\n"+(p1s));
         TextView sc2=findViewById(R.id.disp2);
         sc2.setText(p2n+"\n"+(p2s));
-        TextView winner=findViewById(R.id.winner);
+        final TextView winner=findViewById(R.id.winner);
 
         if(p1s>p2s){
             winner.setText("Player 1"+ " Won!");
@@ -36,15 +39,29 @@ public class winner extends AppCompatActivity {
             winner.setText("Its a Draw!!");
         }
 
-        Button button=findViewById(R.id.button);
+        Button button=findViewById(R.id.loop);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1=new Intent(winner.this,major.class);
-                startActivity(intent1);
+                moveDown(new View(winner.this));
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent1=new Intent(winner.this,major.class);
+                        startActivity(intent1);
+                    }
+                },50);
+
             }
         });
 
+    }
+
+    public void moveDown(View view){
+        Button end=findViewById(R.id.loop);
+        Animation animation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.go_down);
+        end.startAnimation(animation);
     }
 }
 
