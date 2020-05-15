@@ -35,6 +35,7 @@ public class Gview extends View {
     public int s=0;
     public int p1s=0,p2s=0;
     public String p1n,p2n;
+    public boolean gridcheck=true;
 
     public Gview(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -191,18 +192,25 @@ public class Gview extends View {
         int sh = getMeasuredHeight();
 
         Boolean flag=false;
+
         switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if (returnPoint(p) != zero) {
+                Log.d(TAG, "onTouchEvent: Down"+p);
+                if (checkIngrid(p)) {
                     initPoint = returnPoint(p);
+                    Log.d(TAG, "onTouchEvent: init"+ initPoint);
                     path.moveTo(initPoint.x, initPoint.y);
-                }
+                    gridcheck=true;
+                }else {gridcheck=false;}
                 break;
 
 
             case MotionEvent.ACTION_UP:
-                if (returnPoint(p) != zero) {
+                Log.d(TAG, "onTouchEvent: Up"+p);
+
+                if (checkIngrid(p)&& gridcheck==true) {
                     finalPoint = returnPoint(p);
+                    Log.d(TAG, "onTouchEvent: final"+ finalPoint);
                     path.lineTo(finalPoint.x, finalPoint.y);
                     if ((initPoint != finalPoint) && (finalPoint.x == initPoint.x + sw / (col + 1)) || (finalPoint.x == initPoint.x - sw / (col + 1) || (finalPoint.y == initPoint.y - sh / (row + 1)) || (finalPoint.y == initPoint.y + sh / (row + 1)))
                             && (initPoint != zero) && (finalPoint != zero)) {
@@ -220,9 +228,7 @@ public class Gview extends View {
                             init.add(initPoint);
                             lineStore.add(init);
 
-                            Log.d(TAG, "onTouchEvent: Array size"+lineStore.size());
-                            Log.d(TAG, "onTouchEvent: lineStore"+lineStore);
-                            s+=2;
+
 
 
 
@@ -263,7 +269,7 @@ public class Gview extends View {
                                     init4.add(UinitPlus);
                                     init4.add(UfinalPlus);
                                     element.add(init4);
-                                    Log.d(TAG, "onTouchEvent: upper"+ element);
+
 
 
                                     if  (checkPoint(element)){
@@ -313,7 +319,6 @@ public class Gview extends View {
                                     init4.add(LfinalPlus);
                                     element.add(init4);
 
-                                    Log.d(TAG, "onTouchEvent: lower:"+ element);
 
                                     if(checkPoint(element)) {
                                         canvas.drawRect(LinitPlus.x, LinitPlus.y, LfinalPlus.x, finalPoint.y, markpaint);
@@ -360,7 +365,7 @@ public class Gview extends View {
                                     init4.add(RfinalPlus);
                                     element.add(init4);
 
-                                    Log.d(TAG, "onTouchEvent: rightCheck"+element);
+
 
                                     if (checkPoint(element)) {
                                         canvas.drawRect(initPoint.x, initPoint.y, RinitPlus.x, finalPoint.y, markpaint);
@@ -408,7 +413,7 @@ public class Gview extends View {
                                     init4.add(LEfinalPlus);
                                     element.add(init4);
 
-                                    Log.d(TAG, "onTouchEvent: left check"+ element);
+
 
                                     if (checkPoint(element)) {
                                         canvas.drawRect(initPoint.x, initPoint.y, LEinitPlus.x, finalPoint.y, markpaint);
@@ -463,7 +468,7 @@ public class Gview extends View {
 
                     }
 
-                }
+                }else {path.reset();}
 
 
 
@@ -512,8 +517,7 @@ public class Gview extends View {
     public boolean checkval(ArrayList<Point> val,ArrayList<Point> checklist){
 
         if(val.get(0).x==checklist.get(0).x && val.get(0).y==checklist.get(0).y && val.get(1).x==checklist.get(1).x && val.get(1).y==checklist.get(1).y){
-            Log.d(TAG, "checkval: true at"+ val);
-            Log.d(TAG, "checkval: in: "+ checklist);
+
             return true;
 
         }else{
@@ -537,7 +541,21 @@ public class Gview extends View {
         this.p2n = p2n;
     }
 
+    public boolean checkIngrid(Point p){
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if ((p.x <= (grid.get(i).get(j).x + 50) && p.x >= (grid.get(i).get(j).x - 50)) && (p.y <= (grid.get(i).get(j).y + 50) && p.y >= (grid.get(i).get(j).y - 50))) {
+                    Log.d(TAG, "checkIngrid: True");
+                    return true;
 
+                }
+            }
+
+
+        }
+        Log.d(TAG, "checkIngrid: False");
+        return false;
+    }
 
 
 }
