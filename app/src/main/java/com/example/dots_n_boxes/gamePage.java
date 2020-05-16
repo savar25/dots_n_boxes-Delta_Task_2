@@ -24,13 +24,16 @@ public class gamePage extends AppCompatActivity {
     public static TextView p2s;
     public static ImageView color;
     public static int p1sc,p2sc,p3sc,p4sc,p5sc;
-public static Context context,context1;
+    public static Context context,context1;
     public  static int rows,cols,nums;
     public static String p1n,p2n;
     public static String p1nS,p2nS,p3nS,p4nS,p5nS;
     public static View view;
     public static Vibrator vibrator;
     public static int lb,lp,lo;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +56,7 @@ public static Context context,context1;
             }
 
 
-        Gview gview=(Gview)findViewById(R.id.trial);
+        final Gview gview=(Gview)findViewById(R.id.trial);
             gview.setCol(cols);
             gview.setRow(rows);
             gview.setPlayers(nums);
@@ -125,13 +128,25 @@ public static Context context,context1;
 
             }
         });
-            vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-            context=gamePage.this;
-            context1=getApplicationContext();
-            view=new View(context);
-            lb=getResources().getColor(R.color.LightBlue);
-            lp=getResources().getColor(R.color.LightPink);
-            lo=getResources().getColor(R.color.LightOrange);
+
+
+
+         Button undo=findViewById(R.id.undobtn);
+         undo.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 gview.undo();
+             }
+         });
+
+
+         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+         context=gamePage.this;
+         context1=getApplicationContext();
+         view=new View(context);
+         lb=getResources().getColor(R.color.LightBlue);
+         lp=getResources().getColor(R.color.LightPink);
+         lo=getResources().getColor(R.color.LightOrange);
         }
 
 

@@ -13,5 +13,6 @@
     <string name="Player5">Player 5:</string>
     <string name="playNum">No. of Players:</string>
     <string name="grid">Open Grid</string>
+    <string name="undo">UNDO</string>
 
 </resources>

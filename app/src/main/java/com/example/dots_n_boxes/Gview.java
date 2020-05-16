@@ -9,6 +9,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -26,23 +28,25 @@ import java.util.List;
 import static android.content.Context.VIBRATOR_SERVICE;
 
 public class Gview extends View {
-    public Paint paint, cpaint, markpaint, bpaint,margpaint,letPaint;
+    public Paint paint, cpaint, markpaint, bpaint,margpaint,letPaint,epaint,ebpaint;
     public ArrayList<ArrayList<Point>> grid;
     public int col, row;
     private Bitmap bitmap;
     public Canvas canvas;
-    public Path path;
+    public Path path,ePath;
     public Point initPoint, finalPoint;
+    public Point P_initPoint,P_finalPoint;
     ArrayList<ArrayList<Point>>lineStore=new ArrayList<>();
     private static final String TAG = "CV1";
     private static final String TAG1 = "Trial";
     private static final String TAG2 = "Box";
-    public int s=0;
     public int p1s=0,p2s=0,p3s=0,p4s=0,p5s=0;
     public String p1n,p2n,p3n="A",p4n="A",p5n="A";
     public boolean gridcheck=true;
     public int lb,lp,lo;
     public int players=2;
+    public boolean undoFlag=true;
+    public boolean unUP=false,unDown=false,unRight=false,unLeft=false;
 
 
 
@@ -52,6 +56,7 @@ public class Gview extends View {
         grid = new ArrayList<>();
 
         path = new Path();
+        ePath=new Path();
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.Gview, 0, 0);
 
         try {
@@ -123,6 +128,22 @@ public class Gview extends View {
         letPaint.setTextAlign(Paint.Align.CENTER);
         letPaint.setTypeface(Typeface.DEFAULT_BOLD);
 
+        epaint = new Paint(Paint.DITHER_FLAG);
+        epaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        epaint.setAntiAlias(false);
+        epaint.setStrokeWidth(4);
+        epaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        epaint.setStrokeJoin(Paint.Join.MITER);
+        epaint.setStrokeCap(Paint.Cap.BUTT);
+
+        ebpaint = new Paint(Paint.DITHER_FLAG);
+        ebpaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        ebpaint.setAntiAlias(false);
+        ebpaint.setStrokeWidth(2);
+        ebpaint.setStyle(Paint.Style.FILL);
+        ebpaint.setStrokeJoin(Paint.Join.MITER);
+        ebpaint.setStrokeCap(Paint.Cap.BUTT);
+
 
     }
 
@@ -165,13 +186,7 @@ public class Gview extends View {
     }
 
 
-    public Paint getMarkpaint() {
-        return markpaint;
-    }
 
-    public void setMarkpaint(Paint markpaint) {
-        this.markpaint = markpaint;
-    }
 
 
     public Point returnPoint(Point p) {
@@ -197,12 +212,13 @@ public class Gview extends View {
         ArrayList<Point> init1=new ArrayList<>(),init2=new ArrayList<>(),init3=new ArrayList<>(),init4=new ArrayList<>();
         Point p = new Point((int) motionEvent.getX(), (int) motionEvent.getY());
         Point zero = new Point(0, 0);
-        Point p1=new Point();
+        unUP=false;unDown=false;unRight=false;unLeft=false;
         int c=0;
         int sw = getMeasuredWidth();
         int sh = getMeasuredHeight();
 
         Boolean flag=false;
+        undoFlag=true;
 
         switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -238,12 +254,6 @@ public class Gview extends View {
                             init.add(finalPoint);
                             init.add(initPoint);
                             lineStore.add(init);
-
-
-
-
-
-
 
 
 
@@ -284,8 +294,26 @@ public class Gview extends View {
 
 
                                     if  (checkPoint(element)){
-                                        canvas.drawRect(UinitPlus.x, UinitPlus.y, UfinalPlus.x, finalPoint.y, markpaint);
-                                        canvas.drawRect(UinitPlus.x, UinitPlus.y, UfinalPlus.x, finalPoint.y, margpaint);
+                                        float top,left,right,bottom;
+                                        if(UinitPlus.x>UfinalPlus.x){
+                                            left=UinitPlus.x;
+                                            right=UfinalPlus.x;
+                                        }else{
+                                            left=UfinalPlus.x;
+                                            right=UinitPlus.x;
+                                        }
+
+                                        if(UinitPlus.y>finalPoint.y){
+                                            top=finalPoint.y;
+                                            bottom=UinitPlus.y;
+                                        }else{
+                                            bottom=finalPoint.y;
+                                            top=UinitPlus.y;
+                                        }
+                                        canvas.drawRect(left-4, top+4, right+4, bottom-4, markpaint);
+                                        canvas.drawRect(left-4, top+4, right+4, bottom-4, margpaint);
+
+                                        unUP=true;
                                         Log.d(TAG2, "upperboxCheck: assigned");
                                         gamePage.Winmusic();
                                         if(markpaint.getColor()==Color.GREEN){
@@ -343,8 +371,26 @@ public class Gview extends View {
 
 
                                     if(checkPoint(element)) {
-                                        canvas.drawRect(LinitPlus.x, LinitPlus.y, LfinalPlus.x, finalPoint.y, markpaint);
-                                        canvas.drawRect(LinitPlus.x, LinitPlus.y, LfinalPlus.x, finalPoint.y, margpaint);
+                                        float top,left,right,bottom;
+                                        if(LinitPlus.x<LfinalPlus.x){
+                                            left=LinitPlus.x;
+                                            right=LfinalPlus.x;
+                                        }else{
+                                            left=LfinalPlus.x;
+                                            right=LinitPlus.x;
+                                        }
+
+                                        if(LinitPlus.y>finalPoint.y){
+                                            top=finalPoint.y;
+                                            bottom=LinitPlus.y;
+                                        }else{
+                                            bottom=finalPoint.y;
+                                            top=LinitPlus.y;
+                                        }
+
+                                        canvas.drawRect(left+4, top+4, right-4, bottom-4, markpaint);
+                                        canvas.drawRect(left+4, top+4, right-4, bottom-4, margpaint);
+                                        unDown=true;
                                         Log.d(TAG2, "lowerBoxCheck: assgigned");
                                        gamePage.Winmusic();
                                         if(markpaint.getColor()==Color.GREEN){
@@ -400,8 +446,25 @@ public class Gview extends View {
 
 
                                     if (checkPoint(element)) {
-                                        canvas.drawRect(initPoint.x, initPoint.y, RinitPlus.x, finalPoint.y, markpaint);
-                                        canvas.drawRect(initPoint.x, initPoint.y, RinitPlus.x, finalPoint.y, margpaint);
+                                        float top,left,right,bottom;
+                                        if(initPoint.x<RinitPlus.x){
+                                            left=initPoint.x;
+                                            right=RinitPlus.x;
+                                        }else{
+                                            left=RinitPlus.x;
+                                            right=initPoint.x;
+                                        }
+
+                                        if(initPoint.y>finalPoint.y){
+                                            top=finalPoint.y;
+                                            bottom=initPoint.y;
+                                        }else{
+                                            bottom=finalPoint.y;
+                                            top=initPoint.y;
+                                        }
+                                        canvas.drawRect(left+4, top+4, right-4, bottom-4, markpaint);
+                                        canvas.drawRect(left+4, top+4, right-4, bottom-4, margpaint);
+                                        unRight=true;
                                         gamePage.Winmusic();
                                         Log.d(TAG2, "rightCheckBox: assigned");
                                         if (markpaint.getColor() == Color.GREEN) {
@@ -458,9 +521,28 @@ public class Gview extends View {
 
 
                                     if (checkPoint(element)) {
-                                        canvas.drawRect(initPoint.x, initPoint.y, LEinitPlus.x, finalPoint.y, markpaint);
-                                        canvas.drawRect(initPoint.x, initPoint.y, LEinitPlus.x, finalPoint.y, margpaint);
+
+                                        float top,left,right,bottom;
+                                        if(initPoint.x<LEinitPlus.x){
+                                            left=initPoint.x;
+                                            right=LEinitPlus.x;
+                                        }else{
+                                            left=LEinitPlus.x;
+                                            right=initPoint.x;
+                                        }
+
+                                        if(initPoint.y>finalPoint.y){
+                                            top=finalPoint.y;
+                                            bottom=initPoint.y;
+                                        }else{
+                                            bottom=finalPoint.y;
+                                            top=initPoint.y;
+                                        }
+
+                                        canvas.drawRect(left+4, top+4, right-4, bottom-4, markpaint);
+                                        canvas.drawRect(left+4, top+4, right-4, bottom-4, margpaint);
                                         gamePage.Winmusic();
+                                        unLeft=true;
                                         Log.d(TAG2, "leftCheckBox: assigned");
                                         if(markpaint.getColor()==Color.GREEN){
                                             this.p1s++;
@@ -484,6 +566,9 @@ public class Gview extends View {
                                     }
                                     break;
                             }
+
+                            P_initPoint=initPoint;
+                            P_finalPoint=finalPoint;
 
                             if(markpaint.getColor()==Color.GREEN){
                                 if (flag == false) {
@@ -655,6 +740,191 @@ public class Gview extends View {
     public void setPlayers(int players) {
         this.players = players;
     }
+
+    public void undo(){
+        int dh = getMeasuredHeight() / (row + 1);
+        int dw=getMeasuredWidth()/(col+1);
+        if(undoFlag==true) {
+            ePath.moveTo(P_initPoint.x,P_initPoint.y);
+            ePath.lineTo(P_finalPoint.x,P_finalPoint.y);
+            canvas.drawPath(ePath,epaint);
+
+
+
+            for(int i=0;i<lineStore.size();i++){
+                if((lineStore.get(i).get(0)==P_initPoint && lineStore.get(i).get(1)==P_finalPoint)|| (lineStore.get(i).get(1)==P_initPoint && lineStore.get(i).get(0)==P_finalPoint)){
+                    lineStore.remove(i);
+                }
+            }
+
+            if(unUP){
+                canvas.drawRect(initPoint.x, initPoint.y-dh, finalPoint.x, finalPoint.y, ebpaint);
+            }
+            if(unDown){
+                canvas.drawRect(initPoint.x, initPoint.y+dh, finalPoint.x, finalPoint.y, ebpaint);
+            }
+            if(unRight){
+                canvas.drawRect(initPoint.x, initPoint.y, initPoint.x+dw, finalPoint.y, ebpaint);
+            }
+            if(unLeft){
+                canvas.drawRect(initPoint.x, initPoint.y, initPoint.x-dw, finalPoint.y, ebpaint);
+            }
+
+
+
+            if (markpaint.getColor() == Color.GREEN) {
+                switch (players) {
+                    case 2:
+                        markpaint.setColor(Color.YELLOW);
+                        gamePage.setColor(2);
+                        gamePage.setPlayerShow(2);
+                        undoFlag=false;
+                        break;
+                    case 3:
+                        markpaint.setColor(lb);
+                        gamePage.setColor(3);
+                        gamePage.setPlayerShow(3);
+                        undoFlag=false;
+                        break;
+                    case 4:
+                        markpaint.setColor(lp);
+                        gamePage.setColor(4);
+                        gamePage.setPlayerShow(4);
+                        undoFlag=false;
+                        break;
+                    case 5:
+                        markpaint.setColor(lo);
+                        gamePage.setColor(5);
+                        gamePage.setPlayerShow(5);
+                        undoFlag=false;
+                        break;
+
+                }
+                if(this.p1s!=0) {
+                    if (unUP) {
+                        this.p1s--;
+                        unUP = false;
+                    }
+                    if (unDown) {
+                        this.p1s--;
+                        unDown = false;
+                    }
+                    if (unLeft) {
+                        this.p1s--;
+                        unRight = false;
+                    }
+                    if (unRight) {
+                        this.p1s--;
+                        unLeft = false;
+                    }
+                }
+
+            } else if (markpaint.getColor() == Color.YELLOW) {
+                markpaint.setColor(Color.GREEN);
+                gamePage.setColor(1);
+                gamePage.setPlayerShow(1);
+                undoFlag=false;
+
+                if(this.p2s!=0) {
+                    if (unUP) {
+                        this.p2s--;
+                        unUP = false;
+                    }
+                    if (unDown) {
+                        this.p2s--;
+                        unDown = false;
+                    }
+                    if (unLeft) {
+                        this.p2s--;
+                        unRight = false;
+                    }
+                    if (unRight) {
+                        this.p2s--;
+                        unLeft = false;
+                    }
+                }
+            } else if (markpaint.getColor() == lb) {
+
+                markpaint.setColor(Color.YELLOW);
+                gamePage.setColor(2);
+                gamePage.setPlayerShow(2);
+                undoFlag=false;
+                if (this.p3s != 0) {
+                    if (unUP) {
+                        this.p3s--;
+                        unUP = false;
+                    }
+                    if (unDown) {
+                        this.p3s--;
+                        unDown = false;
+                    }
+                    if (unLeft) {
+                        this.p3s--;
+                        unRight = false;
+                    }
+                    if (unRight) {
+                        this.p3s--;
+                        unLeft = false;
+                    }
+                }
+
+            } else if (markpaint.getColor() == lp) {
+
+                markpaint.setColor(lb);
+                gamePage.setColor(3);
+                gamePage.setPlayerShow(3);
+                undoFlag=false;
+                if(this.p4s!=0) {
+                    if (unUP) {
+                        this.p4s--;
+                        unUP = false;
+                    }
+                    if (unDown) {
+                        this.p4s--;
+                        unDown = false;
+                    }
+                    if (unLeft) {
+                        this.p4s--;
+                        unRight = false;
+                    }
+                    if (unRight) {
+                        this.p4s--;
+                        unLeft = false;
+                    }
+                }
+            } else if (markpaint.getColor() == lo) {
+                markpaint.setColor(lp);
+                gamePage.setColor(4);
+                gamePage.setPlayerShow(4);
+                undoFlag=false;
+                if(this.p5s!=0) {
+                    if (unUP) {
+                        this.p5s--;
+                        unUP = false;
+                    }
+                    if (unDown) {
+                        this.p5s--;
+                        unDown = false;
+                    }
+                    if (unLeft) {
+                        this.p5s--;
+                        unRight = false;
+                    }
+                    if (unRight) {
+                        this.p5s--;
+                        unLeft = false;
+                    }
+                }
+            }
+
+            ePath.reset();
+            gamePage.setP1s(this.p1s,this.p2s,this.p3s,this.p4s,this.p5s);
+            invalidate();
+
+        }
+
+    }
+
 }
 
 
