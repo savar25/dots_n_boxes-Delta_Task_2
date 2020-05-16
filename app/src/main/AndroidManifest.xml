@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_new_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".major"></activity>
+        <activity android:name=".playerdet"></activity>
+        <activity android:name=".major" />
         <activity android:name=".winner" />
         <activity
             android:name=".gamePage"
@@ -22,5 +23,7 @@
             </intent-filter>
         </activity>
     </application>
+
     <uses-permission android:name="android.permission.VIBRATE" />
+
 </manifest>

@@ -38,9 +38,13 @@ public class Gview extends View {
     private static final String TAG1 = "Trial";
     private static final String TAG2 = "Box";
     public int s=0;
-    public int p1s=0,p2s=0;
-    public String p1n,p2n;
+    public int p1s=0,p2s=0,p3s=0,p4s=0,p5s=0;
+    public String p1n,p2n,p3n="A",p4n="A",p5n="A";
     public boolean gridcheck=true;
+    public int lb,lp,lo;
+    public int players=2;
+
+
 
     public Gview(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -59,7 +63,9 @@ public class Gview extends View {
             a.recycle();
         }
 
-
+        lb=getResources().getColor(R.color.LightBlue);
+        lp=getResources().getColor(R.color.LightPink);
+        lo=getResources().getColor(R.color.LightOrange);
 
     }
 
@@ -286,9 +292,19 @@ public class Gview extends View {
                                             this.p1s++;
                                             canvas.drawText(p1n,(finalPoint.x+initPoint.x)/2,(finalPoint.y+UfinalPlus.y)/2+10,letPaint);
                                         }
-                                        else{
+                                        else if(markpaint.getColor()==Color.YELLOW){
                                             this.p2s++;
                                             canvas.drawText(p2n,(finalPoint.x+initPoint.x)/2,(finalPoint.y+UfinalPlus.y)/2+10,letPaint);
+
+                                        }else if(markpaint.getColor()==lb){
+                                            this.p3s++;
+                                            canvas.drawText(p3n,(finalPoint.x+initPoint.x)/2,(finalPoint.y+UfinalPlus.y)/2+10,letPaint);
+                                        }else if(markpaint.getColor()==lp) {
+                                            this.p4s++;
+                                            canvas.drawText(p4n, (finalPoint.x + initPoint.x) / 2, (finalPoint.y + UfinalPlus.y) / 2 + 10, letPaint);
+                                        }else if(markpaint.getColor()==lo) {
+                                            this.p5s++;
+                                            canvas.drawText(p5n, (finalPoint.x + initPoint.x) / 2, (finalPoint.y + UfinalPlus.y) / 2 + 10, letPaint);
                                         }
                                         flag=true;
 
@@ -335,10 +351,19 @@ public class Gview extends View {
                                             this.p1s++;
                                             canvas.drawText(p1n,(finalPoint.x+initPoint.x)/2,(finalPoint.y+LfinalPlus.y)/2+10,letPaint);
                                         }
-                                        else{
+                                        else if(markpaint.getColor()==Color.YELLOW){
                                             this.p2s++;
                                             canvas.drawText(p2n,(finalPoint.x+initPoint.x)/2,(finalPoint.y+LfinalPlus.y)/2+10,letPaint);
 
+                                        }else if(markpaint.getColor()==lb){
+                                            this.p3s++;
+                                            canvas.drawText(p3n,(finalPoint.x+initPoint.x)/2,(finalPoint.y+LfinalPlus.y)/2+10,letPaint);
+                                        }else if(markpaint.getColor()==lp) {
+                                            this.p4s++;
+                                            canvas.drawText(p4n, (finalPoint.x + initPoint.x) / 2, (finalPoint.y + LfinalPlus.y) / 2 + 10, letPaint);
+                                        }else if(markpaint.getColor()==lo) {
+                                            this.p5s++;
+                                            canvas.drawText(p5n, (finalPoint.x + initPoint.x) / 2, (finalPoint.y + LfinalPlus.y) / 2 + 10, letPaint);
                                         }
                                         flag=true;
 
@@ -379,14 +404,23 @@ public class Gview extends View {
                                         canvas.drawRect(initPoint.x, initPoint.y, RinitPlus.x, finalPoint.y, margpaint);
                                         gamePage.Winmusic();
                                         Log.d(TAG2, "rightCheckBox: assigned");
-                                        if(markpaint.getColor()==Color.GREEN){
+                                        if (markpaint.getColor() == Color.GREEN) {
                                             this.p1s++;
-                                            canvas.drawText(p1n,(initPoint.x+RinitPlus.x)/2,(initPoint.y+finalPoint.y)/2+10,letPaint);
-                                        }
-                                        else{
+                                            canvas.drawText(p1n, (initPoint.x + RinitPlus.x) / 2, (initPoint.y + finalPoint.y) / 2 + 10, letPaint);
+                                        } else if (markpaint.getColor() == Color.YELLOW) {
                                             this.p2s++;
-                                            canvas.drawText(p2n,(initPoint.x+RinitPlus.x)/2,(initPoint.y+finalPoint.y)/2+10,letPaint);
+                                            canvas.drawText(p2n, (initPoint.x + RinitPlus.x) / 2, (initPoint.y + finalPoint.y) / 2 + 10, letPaint);
+                                        } else if (markpaint.getColor() == lb) {
+                                            this.p3s++;
+                                            canvas.drawText(p3n, (initPoint.x + RinitPlus.x) / 2, (initPoint.y + finalPoint.y) / 2 + 10, letPaint);
+                                        } else if (markpaint.getColor() == lp) {
+                                            this.p4s++;
+                                            canvas.drawText(p4n, (initPoint.x + RinitPlus.x) / 2, (initPoint.y + finalPoint.y) / 2 + 10, letPaint);
+                                        } else if (markpaint.getColor() == lo) {
+                                            this.p5s++;
+                                            canvas.drawText(p5n, (initPoint.x + RinitPlus.x) / 2, (initPoint.y + finalPoint.y) / 2 + 10, letPaint);
                                         }
+
                                         flag=true;
 
                                     }
@@ -432,9 +466,18 @@ public class Gview extends View {
                                             this.p1s++;
                                             canvas.drawText(p1n,(initPoint.x+LEinitPlus.x)/2,(initPoint.y+finalPoint.y)/2+10,letPaint);
                                         }
-                                        else{
+                                        else if(markpaint.getColor()==Color.YELLOW){
                                             this.p2s++;
                                             canvas.drawText(p2n,(initPoint.x+LEinitPlus.x)/2,(initPoint.y+finalPoint.y)/2+10,letPaint);
+                                        } else if (markpaint.getColor() == lb) {
+                                            this.p3s++;
+                                            canvas.drawText(p2n,(initPoint.x+LEinitPlus.x)/2,(initPoint.y+finalPoint.y)/2+10,letPaint);
+                                        } else if (markpaint.getColor() == lp) {
+                                            this.p4s++;
+                                            canvas.drawText(p4n,(initPoint.x+LEinitPlus.x)/2,(initPoint.y+finalPoint.y)/2+10,letPaint);
+                                        } else if (markpaint.getColor() == lo) {
+                                            this.p5s++;
+                                            canvas.drawText(p5n,(initPoint.x+LEinitPlus.x)/2,(initPoint.y+finalPoint.y)/2+10,letPaint);
                                         }
                                         flag=true;
 
@@ -442,34 +485,65 @@ public class Gview extends View {
                                     break;
                             }
 
+                            if(markpaint.getColor()==Color.GREEN){
+                                if (flag == false) {
+                                    markpaint.setColor(Color.YELLOW);
+                                    gamePage.setColor(2);
+                                    gamePage.setPlayerShow(2);
+                                }
 
-                            switch (markpaint.getColor()) {
-                                case Color.GREEN:
-                                    if(flag==false) {
-                                        markpaint.setColor(Color.YELLOW);
-                                        gamePage.setColor(2);
-                                        gamePage.setPlayerShow(2);
-                                    }
-                                    gamePage.setP1s(this.p1s);
-                                    gamePage.setP2s(this.p2s);
-
-
-                                    break;
-                                case Color.YELLOW:
-
-                                    if(flag==false) {
+                            }else if(markpaint.getColor()==Color.YELLOW) {
+                                if(players<3) {
+                                    if (flag == false) {
                                         markpaint.setColor(Color.GREEN);
                                         gamePage.setColor(1);
                                         gamePage.setPlayerShow(1);
                                     }
-                                    gamePage.setP1s(this.p1s);
-                                    gamePage.setP2s(this.p2s);
+                                }else {
+                                    if (flag == false) {
+                                        markpaint.setColor(lb);
+                                        gamePage.setColor(3);
+                                        gamePage.setPlayerShow(3);
+                                    }
+                                }
 
+                            }else if(markpaint.getColor()==lb){
+                                if(players<4) {
+                                    if (flag == false) {
+                                        markpaint.setColor(Color.GREEN);
+                                        gamePage.setColor(1);
+                                        gamePage.setPlayerShow(1);
+                                    }
+                                }else {
+                                    if (flag == false) {
+                                        markpaint.setColor(lp);
+                                        gamePage.setColor(4);
+                                        gamePage.setPlayerShow(4);
+                                    }
+                                }
 
-
-                                    break;
+                            }else if(markpaint.getColor()==lp){
+                                if(players<5) {
+                                    if (flag == false) {
+                                        markpaint.setColor(Color.GREEN);
+                                        gamePage.setColor(1);
+                                        gamePage.setPlayerShow(1);
+                                    }
+                                }else {
+                                    if (flag == false) {
+                                        markpaint.setColor(lo);
+                                        gamePage.setColor(5);
+                                        gamePage.setPlayerShow(5);
+                                    }
+                                }
+                            }else if(markpaint.getColor()==lo){
+                                if(flag==false) {
+                                    markpaint.setColor(Color.GREEN);
+                                    gamePage.setColor(1);
+                                    gamePage.setPlayerShow(1);
+                                }
                             }
-
+                            gamePage.setP1s(this.p1s, this.p2s, this.p3s,this.p4s,this.p5s);
                         } else {
                             path.reset();
                         }
@@ -566,7 +640,21 @@ public class Gview extends View {
         return false;
     }
 
+    public void setP3n(String p3n) {
+        this.p3n = p3n;
+    }
 
+    public void setP4n(String p4n) {
+        this.p4n = p4n;
+    }
+
+    public void setP5n(String p5n) {
+        this.p5n = p5n;
+    }
+
+    public void setPlayers(int players) {
+        this.players = players;
+    }
 }
 
 

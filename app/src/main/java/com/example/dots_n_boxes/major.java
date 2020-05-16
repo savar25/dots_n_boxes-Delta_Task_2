@@ -22,8 +22,7 @@ public class major extends AppCompatActivity {
 
         final EditText row=findViewById(R.id.rowInsert);
         final EditText col=findViewById(R.id.columnInsert);
-        final EditText p1Name=findViewById(R.id.p1insert);
-        final EditText p2Name=findViewById(R.id.p2insert);
+        final EditText num=findViewById(R.id.numInsert);
 
         row.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -47,27 +46,17 @@ public class major extends AppCompatActivity {
             }
         });
 
-        p1Name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        num.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if(b){
-                    p1Name.setHint("");
+                    num.setHint("");
                 }else {
-                    p1Name.setHint("Player 1 Name");
+                    num.setHint("Enter Number");
                 }
             }
         });
 
-        p2Name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if(b){
-                    p2Name.setHint("");
-                }else {
-                    p2Name.setHint("Player 2 Name");
-                }
-            }
-        });
 
 
         Button startg=findViewById(R.id.button);
@@ -84,50 +73,69 @@ public class major extends AppCompatActivity {
                     public void run() {
 
 
-                        if (row.getText().toString().isEmpty() || col.getText().toString().isEmpty() || p1Name.getText().toString().isEmpty() || p2Name.getText().toString().isEmpty()) {
+                        if (row.getText().toString().isEmpty() || col.getText().toString().isEmpty() || num.getText().toString().isEmpty()) {
                             String empty = "";
                             if (row.getText().toString().isEmpty()) {
-                                empty = empty.concat("Row ");
+                                empty = empty.concat("Row \n");
                             }
                             if (col.getText().toString().isEmpty()) {
-                                empty = empty.concat("Column ");
+                                empty = empty.concat("Column \n");
                             }
-                            if (p1Name.getText().toString().isEmpty()) {
-                                empty = empty.concat("Player 1 ");
+                            if (num.getText().toString().isEmpty()) {
+                                empty = empty.concat("Number \n");
                             }
-                            if (p2Name.getText().toString().isEmpty()) {
-                                empty = empty.concat("Player 2 ");
-                            }
+
+
                             Toast.makeText(major.this, empty + " values not mentioned", Toast.LENGTH_SHORT).show();
-                        } else if (Integer.parseInt(row.getText().toString()) > 11 || Integer.parseInt(col.getText().toString()) > 11) {
+                        } else if (Integer.parseInt(row.getText().toString()) > 11|| Integer.parseInt(row.getText().toString())==0 || Integer.parseInt(col.getText().toString()) > 11 || Integer.parseInt(col.getText().toString())==0||(Integer.parseInt(num.getText().toString()) > 5||Integer.parseInt(num.getText().toString()) ==0 )) {
+                            boolean flag=false,flag1=false,flag2=false,flag3=false;
                             String val = "";
+                            String val1="";
                             if (Integer.parseInt(row.getText().toString()) > 11) {
                                 val = val.concat("Row Value ");
+                                flag=true;
+                            }
+                            if (Integer.parseInt(row.getText().toString()) ==0) {
+                                val1 = val1.concat("Row Value ");
+                                flag2=true;
                             }
                             if (Integer.parseInt(col.getText().toString()) > 11) {
                                 val = val.concat("Column Value ");
+                                flag=true;
                             }
-                            Toast.makeText(major.this, val + "greater than 11", Toast.LENGTH_SHORT).show();
+
+                            if (Integer.parseInt(col.getText().toString()) ==0) {
+                                val1 = val1.concat("Column Value ");
+                                flag2=true;
+                            }
+                            if(flag){Toast.makeText(major.this, val + "greater than 11", Toast.LENGTH_SHORT).show();}
+                            if(flag2){Toast.makeText(major.this, val1 + "cannot be 0", Toast.LENGTH_SHORT).show();}
+                            String vale = "";
+                            val1="";
+                            if (Integer.parseInt(num.getText().toString()) > 5) {
+                                vale = vale.concat("Number Value ");
+                                flag1=true;
+                            }
+                            if (Integer.parseInt(num.getText().toString()) ==0) {
+                                val1 = val1.concat("Number Value ");
+                                flag3=true;
+                            }
+                            if(flag1){Toast.makeText(major.this, vale + "greater than 5", Toast.LENGTH_SHORT).show();}
+                            if(flag3){Toast.makeText(major.this, val1 + "cannot be 0", Toast.LENGTH_SHORT).show();}
                         } else {
 
                             Integer rows = Integer.parseInt(row.getText().toString());
                             Integer cols = Integer.parseInt(col.getText().toString());
-                            String p1n = p1Name.getText().toString();
-                            String p2n = p2Name.getText().toString();
+                            Integer nums=Integer.parseInt(num.getText().toString());
 
-                            String temp;
-                            temp = p1n.substring(0, 1);
-                            temp = temp.toUpperCase();
-                            p1n = temp + p1n.substring(1);
-                            temp = p2n.substring(0, 1);
-                            temp = temp.toUpperCase();
-                            p2n = temp + p2n.substring(1);
 
-                            Intent intent = new Intent(major.this, gamePage.class);
+
+
+                            Intent intent = new Intent(major.this, playerdet.class);
                             intent.putExtra("rows", rows);
                             intent.putExtra("cols", cols);
-                            intent.putExtra("p1n", p1n);
-                            intent.putExtra("p2n", p2n);
+                            intent.putExtra("nums",nums);
+
                             startActivity(intent);
                         }
 

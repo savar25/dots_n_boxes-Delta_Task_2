@@ -5,4 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="Orange">#FF6347</color>
     <color name="DBrown">#654321</color>
+    <color name="LightBlue">#ADD8E6</color>
+    <color name="LightPink">#FFB6C1</color>
+    <color name="LightOrange">#FFA500</color>
 </resources>
