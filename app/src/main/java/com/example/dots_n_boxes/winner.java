@@ -89,9 +89,9 @@ public class winner extends AppCompatActivity {
 
         if(nums==2){
             if(p2s==p1s){winner.setText("Its a Draw!!");}
-        }else if(nums==3){if(p2s==p1s && p3s==p1s){winner.setText("Its a Draw!!");}
-        }else if(nums==4){if(p2s==p1s && p3s==p1s && p4s==p1s){winner.setText("Its a Draw!!");}
-        }else if(nums==5){if(p2s==p1s && p3s==p1s && p4s==p1s && p5s==p1s){winner.setText("Its a Draw!!");}}
+        }else if(nums==3){if(p1s==max && p2s==max && p3s==max){winner.setText("Its a Draw!!");}
+        }else if(nums==4){if(p1s==max && p2s==max && p3s==max && p4s==max){winner.setText("Its a Draw!!");}
+        }else if(nums==5){if(p1s==max && p2s==max && p3s==max && p4s==max && p5s==max){winner.setText("Its a Draw!!");}}
 
 
         Button button=findViewById(R.id.button);
