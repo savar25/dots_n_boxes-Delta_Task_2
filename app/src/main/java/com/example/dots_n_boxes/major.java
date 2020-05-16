@@ -87,7 +87,7 @@ public class major extends AppCompatActivity {
 
 
                             Toast.makeText(major.this, empty + " values not mentioned", Toast.LENGTH_SHORT).show();
-                        } else if (Integer.parseInt(row.getText().toString()) > 11|| Integer.parseInt(row.getText().toString())==0 || Integer.parseInt(col.getText().toString()) > 11 || Integer.parseInt(col.getText().toString())==0||(Integer.parseInt(num.getText().toString()) > 5||Integer.parseInt(num.getText().toString()) ==0 )) {
+                        } else if (Integer.parseInt(row.getText().toString()) > 11|| Integer.parseInt(row.getText().toString())==0 || Integer.parseInt(col.getText().toString()) > 11 || Integer.parseInt(col.getText().toString())==0||(Integer.parseInt(num.getText().toString()) > 5||Integer.parseInt(num.getText().toString()) ==0||Integer.parseInt(num.getText().toString()) ==1 )) {
                             boolean flag=false,flag1=false,flag2=false,flag3=false;
                             String val = "";
                             String val1="";
@@ -119,6 +119,9 @@ public class major extends AppCompatActivity {
                             if (Integer.parseInt(num.getText().toString()) ==0) {
                                 val1 = val1.concat("Number Value ");
                                 flag3=true;
+                            }
+                            if(Integer.parseInt(num.getText().toString()) ==1){
+                                Toast.makeText(major.this,  "Number Value cannot be 1", Toast.LENGTH_SHORT).show();
                             }
                             if(flag1){Toast.makeText(major.this, vale + "greater than 5", Toast.LENGTH_SHORT).show();}
                             if(flag3){Toast.makeText(major.this, val1 + "cannot be 0", Toast.LENGTH_SHORT).show();}
