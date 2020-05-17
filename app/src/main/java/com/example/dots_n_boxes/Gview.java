@@ -75,6 +75,8 @@ public class Gview extends View {
     }
 
 
+   
+    
     public void setupPaint() {
 
 
@@ -158,6 +160,8 @@ public class Gview extends View {
     }
 
 
+   
+    
     @Override
     public void onDraw(Canvas canvas) {
 
@@ -651,6 +655,8 @@ public class Gview extends View {
 
     }
 
+
+    
     public boolean checkPoint (ArrayList<ArrayList<Point>> element){
         getMeasuredHeight();
         getMeasuredWidth();
@@ -682,6 +688,9 @@ public class Gview extends View {
         }
     }
 
+
+    
+    
     public boolean checkval(ArrayList<Point> val,ArrayList<Point> checklist){
 
         if(val.get(0).x==checklist.get(0).x && val.get(0).y==checklist.get(0).y && val.get(1).x==checklist.get(1).x && val.get(1).y==checklist.get(1).y){
@@ -693,22 +702,27 @@ public class Gview extends View {
         }
     }
 
+    
     public void setCol(int col) {
         this.col = col;
     }
 
+    
     public void setRow(int row) {
         this.row = row;
     }
 
+    
     public void setP1n(String p1n) {
         this.p1n = p1n;
     }
 
+    
     public void setP2n(String p2n) {
         this.p2n = p2n;
     }
 
+    
     public boolean checkIngrid(Point p){
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
@@ -725,25 +739,32 @@ public class Gview extends View {
         return false;
     }
 
+    
     public void setP3n(String p3n) {
         this.p3n = p3n;
     }
 
+    
     public void setP4n(String p4n) {
         this.p4n = p4n;
     }
 
+    
     public void setP5n(String p5n) {
         this.p5n = p5n;
     }
 
+    
     public void setPlayers(int players) {
         this.players = players;
     }
 
+    
     public void undo(){
         int dh = getMeasuredHeight() / (row + 1);
         int dw=getMeasuredWidth()/(col+1);
+    
+   
         if(undoFlag==true) {
             ePath.moveTo(P_initPoint.x,P_initPoint.y);
             ePath.lineTo(P_finalPoint.x,P_finalPoint.y);
