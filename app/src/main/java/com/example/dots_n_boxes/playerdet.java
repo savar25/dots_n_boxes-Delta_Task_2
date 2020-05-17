@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class playerdet extends AppCompatActivity {
@@ -26,7 +27,9 @@ public class playerdet extends AppCompatActivity {
         final EditText p3Name=findViewById(R.id.p3insert);
         final EditText p4Name=findViewById(R.id.p4insert);
         final EditText p5Name=findViewById(R.id.p5insert);
-
+        final TextView p3title=findViewById(R.id.p3title);
+        final TextView p4title=findViewById(R.id.p4title);
+        final TextView p5title=findViewById(R.id.p5title);
 
         p1Name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -90,9 +93,15 @@ public class playerdet extends AppCompatActivity {
         p5Name.setEnabled(true);
 
 
-        if(players<5){p5Name.setEnabled(false);}
-        if(players<4){p4Name.setEnabled(false);}
-        if(players<3){p3Name.setEnabled(false);}
+        if(players<5){p5Name.setEnabled(false);
+        p5Name.setVisibility(View.INVISIBLE);
+        p5title.setVisibility(View.INVISIBLE);}
+        if(players<4){p4Name.setEnabled(false);
+            p4Name.setVisibility(View.INVISIBLE);
+            p4title.setVisibility(View.INVISIBLE);}
+        if(players<3){p3Name.setEnabled(false);
+            p3Name.setVisibility(View.INVISIBLE);
+            p3title.setVisibility(View.INVISIBLE);}
 
         Button mainGrid=(Button)findViewById(R.id.grid);
         mainGrid.setOnClickListener(new View.OnClickListener() {
