@@ -3,6 +3,7 @@ package com.example.dots_n_boxes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class major extends AppCompatActivity {
@@ -24,6 +26,9 @@ public class major extends AppCompatActivity {
         final EditText col=findViewById(R.id.columnInsert);
         final EditText num=findViewById(R.id.numInsert);
 
+        TextView head=findViewById(R.id.Heading);
+        Typeface typeface=Typeface.createFromAsset(getAssets(),"gunplay.ttf");
+        head.setTypeface(typeface);
         row.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
