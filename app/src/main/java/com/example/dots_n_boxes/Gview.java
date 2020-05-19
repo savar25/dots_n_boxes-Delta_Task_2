@@ -123,12 +123,14 @@ public class Gview extends View {
         margpaint.setStrokeJoin(Paint.Join.MITER);
         margpaint.setStrokeCap(Paint.Cap.BUTT);
 
+        Typeface letter=Typeface.createFromAsset(getResources().getAssets(),"cena.ttf");
+
         letPaint = new Paint(Paint.DITHER_FLAG);
         letPaint.setColor(getResources().getColor(R.color.DBrown));
         letPaint.setAntiAlias(false);
         letPaint.setTextSize(40);
         letPaint.setTextAlign(Paint.Align.CENTER);
-        letPaint.setTypeface(Typeface.DEFAULT_BOLD);
+        letPaint.setTypeface(letter);
 
         epaint = new Paint(Paint.DITHER_FLAG);
         epaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
